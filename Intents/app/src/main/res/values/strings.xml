@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">Intents</string>
+
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="title_activity_detail">detail</string>
+    <string name="takePhoto">Take Photo</string>
+    <string name="sendInfo">Send</string>
+    <string name="btnSendText">Send</string>
+    <string name="btnTakePhoto">Take Photo</string>
+    <string name="closeButton">Close</string>
+</resources>
