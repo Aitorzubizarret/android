@@ -3,5 +3,16 @@
 
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
-    <string name="earthquakes_url">http://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_day.geojson</string>
+    <string name="earthquakes_url">http://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_hour.geojson</string>
+    <string name="title_activity_detail">Detail</string>
+    <string name="downloadedEarthquakes">%d downloaded earthquakes.</string>
+    <string name="title_activity_settings">Preferencias</string>
+    <string name="earthquakes_refresh">Earthquakes refresh</string>
+    <string name="earthquakes_filter">Earthquakes filter</string>
+
+    <string name="PREF_AUTO_UPDATE">Autorefresh</string>
+    <string name="PREF_UPDATE_INTERVAL">Autorefresh2</string>
+    <string name="PREF_AUTO_UPDATE2">Autorefresh3</string>
+    <string name="auto_update_prompt">Autorefresh4</string>
+    <string name="auto_update_desc">Descripcion5</string>
 </resources>

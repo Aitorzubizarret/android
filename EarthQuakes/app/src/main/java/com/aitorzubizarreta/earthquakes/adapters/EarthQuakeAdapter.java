@@ -1,14 +1,18 @@
 package com.aitorzubizarreta.earthquakes.adapters;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
+import com.aitorzubizarreta.earthquakes.R;
 import com.aitorzubizarreta.earthquakes.model.EarthQuake;
 
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 /**
@@ -39,7 +43,15 @@ public class EarthQuakeAdapter extends ArrayAdapter<EarthQuake> {
             layout = (LinearLayout) convertView;
         }
 
+        EarthQuake earthQuake = getItem(position);
+        TextView textViewMagnitude = (TextView) layout.findViewById(R.id.textViewMagnitude);
+        TextView textViewLocation = (TextView) layout.findViewById(R.id.textViewLocation);
+        TextView textViewDate = (TextView) layout.findViewById(R.id.textViewDate);
 
-        return super.getView(position, convertView, parent);
+        textViewMagnitude.setText(String.valueOf(earthQuake.getMagnitude()));
+        textViewLocation.setText(earthQuake.getPlace());
+        textViewDate.setText(earthQuake.getTime().toString());
+
+        return layout;
     }
 }

@@ -6,8 +6,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Toast;
 
 import com.aitorzubizarreta.earthquakes.R;
+import com.aitorzubizarreta.earthquakes.adapters.EarthQuakeAdapter;
 import com.aitorzubizarreta.earthquakes.model.EarthQuake;
 import com.aitorzubizarreta.earthquakes.task.DownloadEarthquakesTask;
 
@@ -20,6 +22,7 @@ public class EarthQuakeFragment extends ListFragment implements DownloadEarthqua
 
     private ArrayList<EarthQuake> earthquakes;
     private ArrayAdapter<EarthQuake> aa;
+    private ArrayAdapter<EarthQuake> aa2;
 
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
@@ -55,8 +58,13 @@ public class EarthQuakeFragment extends ListFragment implements DownloadEarthqua
         View layout =  super.onCreateView(inflater, container, savedInstanceState);
 
         // Instanciar el adapter
-        aa = new ArrayAdapter<EarthQuake>(getActivity(), android.R.layout.simple_list_item_1, earthquakes);
-        setListAdapter(aa);
+        //aa = new ArrayAdapter<EarthQuake>(getActivity(), android.R.layout.simple_list_item_1, earthquakes);
+        //setListAdapter(aa);
+
+        // Nuevo adapter personalizado
+        aa2 = new EarthQuakeAdapter(getActivity(), R.layout.eartquake_item, earthquakes);
+        //aa2 = new ArrayAdapter<EarthQuake>(getActivity(), R.layout.eartquake_item, earthquakes);
+        setListAdapter(aa2);
 
         return layout;
     }
@@ -64,6 +72,13 @@ public class EarthQuakeFragment extends ListFragment implements DownloadEarthqua
     @Override
     public void AddEarthQuake(EarthQuake earthquake) {
         earthquakes.add(0, earthquake);
-        aa.notifyDataSetChanged();
+        aa2.notifyDataSetChanged();
+    }
+
+    @Override
+    public void notifyTotal(Integer count) {
+        String msg = getString(R.string.downloadedEarthquakes, count);
+        Toast t = Toast.makeText(getActivity(), msg, Toast.LENGTH_LONG);
+        t.show();
     }
 }
