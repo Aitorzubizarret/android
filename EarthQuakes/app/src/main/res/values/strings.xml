@@ -10,9 +10,14 @@
     <string name="earthquakes_refresh">Earthquakes refresh</string>
     <string name="earthquakes_filter">Earthquakes filter</string>
 
-    <string name="PREF_AUTO_UPDATE">Autorefresh</string>
-    <string name="PREF_UPDATE_INTERVAL">Autorefresh2</string>
-    <string name="PREF_AUTO_UPDATE2">Autorefresh3</string>
-    <string name="auto_update_prompt">Autorefresh4</string>
-    <string name="auto_update_desc">Descripcion5</string>
+    <string name="PREF_AUTO_UPDATE">pref-update</string>
+    <string name="PREF_UPDATE_INTERVAL">pref-interval</string>
+    <string name="PREF_MIN_MAGNITUDE">pref-magnitude</string>
+    <string name="auto_update_prompt">Auto update</string>
+    <string name="auto_update_desc">Update earthquakes automatically or not</string>
+    <string name="auto_update_interval_prompt">Update Frequency</string>
+    <string name="auto_update_interval_desc">Frequency at which to refresh earthquake list</string>
+    <string name="min_magnitude_prompt">Minimim Quake Magnitude</string>
+    <string name="min_magnitude_desc">Select the minimum magnitude earthquake </string>
+
 </resources>

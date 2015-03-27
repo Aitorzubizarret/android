@@ -3,9 +3,9 @@ package com.aitorzubizarreta.earthquakes;
 import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-
 
 public class MainActivity extends ActionBarActivity {
 
@@ -16,7 +16,6 @@ public class MainActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
     }
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -33,6 +32,7 @@ public class MainActivity extends ActionBarActivity {
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
+        // Este intent es el que recoge la llamada para abrir las preferencias cuando pulsamos el botón menú
         if (id == R.id.action_settings) {
             Intent prefsIntent = new Intent(this, SettingsActivity.class);
             startActivityForResult(prefsIntent, PREFS_ACTIVITY);
@@ -45,5 +45,10 @@ public class MainActivity extends ActionBarActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+        Log.d("HOLA", "Hemos cerrado la ventana de las preferencias");
     }
+
+    // Descargar de internet los datos y guardarlos en la DB
+    // Sacar los metodos del EarthquakeFragment
+    // El main implementara la interfaz DownloadEarthquakesTask
 }

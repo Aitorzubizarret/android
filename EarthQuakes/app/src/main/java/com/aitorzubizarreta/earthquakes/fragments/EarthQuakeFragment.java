@@ -1,7 +1,9 @@
 package com.aitorzubizarreta.earthquakes.fragments;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.app.ListFragment;
+import android.preference.PreferenceManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,8 +23,9 @@ import java.util.ArrayList;
 public class EarthQuakeFragment extends ListFragment implements DownloadEarthquakesTask.AddEarthQuakeInterface{
 
     private ArrayList<EarthQuake> earthquakes;
-    private ArrayAdapter<EarthQuake> aa;
+    //private ArrayAdapter<EarthQuake> aa;
     private ArrayAdapter<EarthQuake> aa2;
+    private SharedPreferences prefs;
 
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
@@ -37,7 +40,9 @@ public class EarthQuakeFragment extends ListFragment implements DownloadEarthqua
 
         earthquakes = new ArrayList<>();
 
-        DownloadEarthquakesTask task = new DownloadEarthquakesTask(this);
+        prefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
+
+        DownloadEarthquakesTask task = new DownloadEarthquakesTask(getActivity());
         task.execute(getString(R.string.earthquakes_url));
         // Creamos un thread para ejecutar la conexión a internet
         // Es necesario. La conexión a internet no se ejecuta en el thread principal
@@ -68,12 +73,16 @@ public class EarthQuakeFragment extends ListFragment implements DownloadEarthqua
 
         return layout;
     }
-
+    /*
     @Override
     public void AddEarthQuake(EarthQuake earthquake) {
-        earthquakes.add(0, earthquake);
-        aa2.notifyDataSetChanged();
+        double minMagnitude = Double.parseDouble(prefs.getString(getString(R.string.PREF_MIN_MAGNITUDE), "0"));
+        if(earthquake.getMagnitude() >= minMagnitude) {
+            earthquakes.add(0, earthquake);
+            aa2.notifyDataSetChanged();
+        }
     }
+    */
 
     @Override
     public void notifyTotal(Integer count) {

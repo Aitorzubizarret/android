@@ -12,22 +12,27 @@
 
         <!-- Frecuencia refresco (si el autorefresh es si)-->
         <ListPreference
-            android:defaultValue="5"
+            android:defaultValue="2"
             android:key="@string/PREF_UPDATE_INTERVAL"
-            android:title="A"
-            android:summary="A"
-            android:entries="@array/magnitudeoptions"
-            android:entryValues="@array/magnitudevalues"
+            android:title="@string/auto_update_interval_prompt"
+            android:summary="@string/auto_update_interval_desc"
+            android:entries="@array/intervaloptions"
+            android:entryValues="@array/intervalvalues"
             android:dependency="@string/PREF_AUTO_UPDATE">
-
         </ListPreference>
-
 
     </PreferenceCategory>
     <PreferenceCategory
         android:title="@string/earthquakes_filter">
         <!-- Magnitud minima -->
-
+        <ListPreference
+            android:defaultValue="1"
+            android:key="@string/PREF_MIN_MAGNITUDE"
+            android:title="@string/min_magnitude_prompt"
+            android:summary="@string/min_magnitude_desc"
+            android:entries="@array/magnitudeoptions"
+            android:entryValues="@array/magnitudevalues">
+        </ListPreference>
 
     </PreferenceCategory>
 </PreferenceScreen>
