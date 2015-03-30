@@ -42,8 +42,11 @@ public class EarthQuakeFragment extends ListFragment implements DownloadEarthqua
 
         prefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
 
-        DownloadEarthquakesTask task = new DownloadEarthquakesTask(getActivity());
+        /*
+        DownloadEarthquakesTask task = new DownloadEarthquakesTask(getActivity(), this);
         task.execute(getString(R.string.earthquakes_url));
+        */
+
         // Creamos un thread para ejecutar la conexión a internet
         // Es necesario. La conexión a internet no se ejecuta en el thread principal
         /*

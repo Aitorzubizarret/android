@@ -34,7 +34,7 @@ public class DownloadEarthquakesTask extends AsyncTask<String, EarthQuake, Integ
 
 
     public interface AddEarthQuakeInterface {
-        //public void AddEarthQuake(EarthQuake earthquake);
+        public void AddEarthQuake(EarthQuake earthquake);
         public void notifyTotal(Integer count);
     }
 
@@ -58,7 +58,7 @@ public class DownloadEarthquakesTask extends AsyncTask<String, EarthQuake, Integ
     protected void onProgressUpdate(EarthQuake... earthquakes) {
         super.onProgressUpdate(earthquakes);
 
-        //target.AddEarthQuake(earthquakes[0]);
+        target.AddEarthQuake(earthquakes[0]);
     }
 
     @Override
@@ -131,6 +131,9 @@ public class DownloadEarthquakesTask extends AsyncTask<String, EarthQuake, Integ
             Log.d(EARTHQUEAKE, "Time " + earthquake.getTime());
 
             publishProgress(earthquake); // onProgressUpdate
+
+            // Guardar los datos en la BD
+
 
         } catch (JSONException e) {
             e.printStackTrace();
