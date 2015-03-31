@@ -20,7 +20,7 @@ import java.util.ArrayList;
 /**
  * A fragment representing a list of EarthQuakes.
  */
-public class EarthQuakeFragment extends ListFragment implements DownloadEarthquakesTask.AddEarthQuakeInterface{
+public class EarthQuakeFragment extends ListFragment {
 
     private ArrayList<EarthQuake> earthquakes;
     //private ArrayAdapter<EarthQuake> aa;
@@ -87,10 +87,5 @@ public class EarthQuakeFragment extends ListFragment implements DownloadEarthqua
     }
     */
 
-    @Override
-    public void notifyTotal(Integer count) {
-        String msg = getString(R.string.downloadedEarthquakes, count);
-        Toast t = Toast.makeText(getActivity(), msg, Toast.LENGTH_LONG);
-        t.show();
-    }
+
 }
