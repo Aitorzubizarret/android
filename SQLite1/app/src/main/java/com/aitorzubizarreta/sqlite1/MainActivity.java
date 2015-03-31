@@ -20,16 +20,17 @@ public class MainActivity extends ActionBarActivity {
 
         crearBD();
         /*
-        insertarPersona("Jon", "Apellido", 20);
-        insertarPersona("Juan", "Apellido", 30);
-        insertarPersona("Pablo", "Apellido", 24);
-        insertarPersona("Maria", "Apellido", 27);
-        insertarPersona("Marta", "Apellido", 45);
-        insertarPersona("Monica", "Apellido", 18);
-        insertarPersona("Mikel", "Apellido", 31);
-        insertarPersona("Jose", "Apellido", 76);
-        insertarPersona("Manolo", "Apellido", 64);
+        insertarPersona("Jon", "Garcia", 20);
+        insertarPersona("Juan", "Lopez", 30);
+        insertarPersona("Pablo", "Fernandez", 24);
+        insertarPersona("Maria", "Rodriguez", 27);
+        insertarPersona("Marta", "Herrera", 45);
+        insertarPersona("Monica", "Martin", 18);
+        insertarPersona("Mikel", "Soler", 31);
+        insertarPersona("Jose", "Gonzalez", 76);
+        insertarPersona("Manolo", "Villa", 64);
         */
+        borrarPersonas("Aitor");
 
         mostrarDatosPersonas();
     }
@@ -41,8 +42,9 @@ public class MainActivity extends ActionBarActivity {
     private void insertarPersona(String nombre, String apellido, int edad) {
         gestorDB.insertPerson(nombre, apellido, edad);
     }
-    private void borrarPersona() {
-
+    private void borrarPersonas(String nombre) {
+        int personasEliminadas = gestorDB.deletePersons(nombre);
+        Log.d(CONSOLE, "Se han eliminado " + personasEliminadas + " personas.");
     }
     private void modificarPersona() {
 
