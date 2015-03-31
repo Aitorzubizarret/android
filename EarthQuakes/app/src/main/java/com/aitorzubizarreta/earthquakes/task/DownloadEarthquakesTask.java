@@ -49,7 +49,7 @@ public class DownloadEarthquakesTask extends AsyncTask<String, EarthQuake, Integ
     protected Integer doInBackground(String... urls) {
         int count = 0;
         if (urls.length > 0) {
-            count = updateEarthquakes(urls[0]);
+            //count = updateEarthquakes(urls[0]);
         }
         return count;
     }
@@ -67,76 +67,5 @@ public class DownloadEarthquakesTask extends AsyncTask<String, EarthQuake, Integ
         target.notifyTotal(count);
     }
 
-    private Integer updateEarthquakes(String url1) {
 
-        JSONObject json;
-        String earthquakesFeed = url1;
-        Integer count = 0;
-
-        try {
-            URL url = new URL(earthquakesFeed);
-
-            //	Create a new HTTP URL connection
-            URLConnection connection = url.openConnection();
-            HttpURLConnection httpConnection = (HttpURLConnection)connection;
-
-            int	responseCode = httpConnection.getResponseCode();
-            if	(responseCode == HttpURLConnection.HTTP_OK)	{
-                BufferedReader streamReader = new BufferedReader(new InputStreamReader(httpConnection.getInputStream(), "UTF-8"));
-                StringBuilder responseStrBuilder = new StringBuilder();
-
-                String inputStr;
-                while ((inputStr = streamReader.readLine()) != null)
-                    responseStrBuilder.append(inputStr);
-
-                json = new JSONObject(responseStrBuilder.toString());
-                JSONArray earthquakes = json.getJSONArray("features");
-
-                count = earthquakes.length();
-
-                for (int i = earthquakes.length()-1; i >= 0; i--) {
-                    processEarthQuakeTask(earthquakes.getJSONObject(i));
-                }
-            }
-        } catch (MalformedURLException e) {
-            Log.d(TAG, "Malformed	URL	Exception.", e);
-        } catch (IOException e) {
-            Log.d(TAG, "IO	Exception.", e);
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-
-        return count;
-    }
-
-    private void processEarthQuakeTask(JSONObject jsonObject) {
-        try {
-            // Obtenemos las coordenadas
-            JSONArray jsonCoords = jsonObject.getJSONObject("geometry").getJSONArray("coordinates");
-            Coordinate coords = new Coordinate(jsonCoords.getDouble(0), jsonCoords.getDouble(1), jsonCoords.getDouble(2));
-
-            String id = jsonObject.getString("id");
-            JSONObject properties = jsonObject.getJSONObject("properties");
-            EarthQuake earthquake = new EarthQuake();
-            earthquake.set_id(jsonObject.getString("id"));
-            earthquake.setPlace(properties.getString("place"));
-            earthquake.setMagnitude(properties.getDouble("mag"));
-            earthquake.setTime(properties.getLong("time"));
-            earthquake.setUrl(properties.getString("url"));
-            earthquake.setCoords(coords);
-
-            Log.d(EARTHQUEAKE, earthquake.toString());
-            Log.d(EARTHQUEAKE, "Magnitude " + earthquake.getMagnitude());
-            Log.d(EARTHQUEAKE, "Place " + earthquake.getPlace());
-            Log.d(EARTHQUEAKE, "Time " + earthquake.getTime());
-
-            //publishProgress(earthquake); // onProgressUpdate
-
-            // Guardar los datos en la BD
-            earthquakeDB.insertEarthquake(earthquake);
-
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-    }
 }
