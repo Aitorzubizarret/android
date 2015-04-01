@@ -7,6 +7,8 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 import java.util.logging.StreamHandler;
 
 /**
@@ -20,11 +22,16 @@ public class GestorDB{
 
     // Definir las tablas de las columnas de la BD
     public static final String KEY_ID = "_id";
-    public static final String KEY_NOMBRE = "nombre";
-    public static final String KEY_APELLIDO = "apellido";
-    public static final String KEY_EDAD = "edad";
+    public static final String KEY_NOMBRE = "name";
+    public static final String KEY_APELLIDO = "surname";
+    public static final String KEY_EDAD = "age";
 
-    //public static final String[] allColumns = [];
+    public static final String[] allColumns = {
+            KEY_ID,
+            KEY_NOMBRE,
+            KEY_APELLIDO,
+            KEY_EDAD
+    };
 
     // Constructor
     public GestorDB(Context context) {
@@ -57,20 +64,44 @@ public class GestorDB{
             db.endTransaction();
         }
     }
-    public int deletePersons(String nombre) {
+    public int deletePersons(String whereClause, ArrayList whereArgs) {
         int contador = 0;
 
+        db.delete(DBOpenHelper.NombreTablaDB, whereClause, whereArgs);
+        /*
         db.beginTransaction();
         try {
             String query = "DELETE FROM " + DBOpenHelper.NombreTablaDB + " WHERE " + KEY_NOMBRE + " LIKE " + nombre;
             Cursor cursor = db.rawQuery(query, null);
-            
+
         } catch (Exception e) {
 
         }
+        */
 
         return contador;
     }
+    /*
+    public int deletePersonsWhereIdIs(ArrayList<Integer> IDs) {
+        String whereClause = KEY_ID + "=?";
+        int[] whereArgs = IDs;
+        deletePersons(whereClause, whereArgs);
+        return 1;
+    }
+    */
+    public int deletePersonsWhereNameIs(ArrayList<String> NAMEs) {
+        String whereClause = KEY_NOMBRE + "=?";
+        return 1;
+    }
+    public int deletePersonsWhereSurnameIs(ArrayList<String> SURNAMEs) {
+        String whereClause = KEY_APELLIDO + "=?";
+        return 1;
+    }
+    public int deletePersonsWhereAgeIs(ArrayList<Integer> AGEs) {
+        String whereClause = KEY_EDAD + "=?";
+        return 1;
+    }
+
     public void modifyPerson() {
 
     }
