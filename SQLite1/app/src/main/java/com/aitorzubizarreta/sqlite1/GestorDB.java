@@ -57,14 +57,19 @@ public class GestorDB{
             db.endTransaction();
         }
     }
-    public void deletePerson(String nombre) {
+    public int deletePersons(String nombre) {
+        int contador = 0;
+
         db.beginTransaction();
         try {
-            String query = "DELETE FROM";
+            String query = "DELETE FROM " + DBOpenHelper.NombreTablaDB + " WHERE " + KEY_NOMBRE + " LIKE " + nombre;
             Cursor cursor = db.rawQuery(query, null);
+            
         } catch (Exception e) {
 
         }
+
+        return contador;
     }
     public void modifyPerson() {
 
@@ -88,6 +93,9 @@ public class GestorDB{
             Log.e("Base de datos", "Error al acceder a los datos de la consulta SELECT");
         }
     }
+    public void query() {
+
+    }
 
     // Creamos una clase dentro nuestra clase para que podamos gestionar la DB sólo desde aqui.
     private static class DBOpenHelper extends SQLiteOpenHelper {
@@ -95,7 +103,7 @@ public class GestorDB{
         private static final String NombreDB = "personas.db";
         private static final String NombreTablaDB = "PERSONAS";
         private static final int VersionDB = 1;
-        private static final String SentenciaSQLCrearTabla = "CREATE Table " + NombreTablaDB + "(_id INTEGER PRIMARY KEY AUTOINCREMENT, " + KEY_NOMBRE + " TEXT, " + KEY_APELLIDO + " TEXT, " + KEY_EDAD + " INTEGER)";
+        private static final String SentenciaSQLCrearTabla = "CREATE Table " + NombreTablaDB + "(" + KEY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " + KEY_NOMBRE + " TEXT, " + KEY_APELLIDO + " TEXT, " + KEY_EDAD + " INTEGER)";
 
         // Constructor
         public DBOpenHelper(Context context, String name, SQLiteDatabase.CursorFactory factory, int version) {
