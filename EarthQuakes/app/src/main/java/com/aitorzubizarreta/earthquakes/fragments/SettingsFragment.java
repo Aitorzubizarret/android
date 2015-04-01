@@ -24,6 +24,7 @@ public class SettingsFragment extends PreferenceFragment implements SharedPrefer
         addPreferencesFromResource(R.xml.userpreferences);
     }
 
+    // Mover
     @Override
     public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
         Log.d("Hola", "Hemos cambiado las preferencias");
