@@ -105,8 +105,13 @@ public class GestorDB{
     public void modifyPerson() {
 
     }
+    public void query() {
+        String tableName = DBOpenHelper.NombreTablaDB;
+        String[] tableColumns;
+        String[] whe;
+        Cursor cursor = db.query(tableName, tableColumns, whereClause, whereArgs, groupBy, having, orderBy);
+    }
     public void getAllPersonas() {
-        //Cursor cursor = db.query();
         Cursor cursor2 = db.rawQuery("Select * from personas", null);
         try {
             //cursor2.moveToFirst();

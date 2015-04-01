@@ -6,8 +6,12 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
-public class MainActivity extends ActionBarActivity {
+import com.aitorzubizarreta.earthquakes.services.DownloadEarthquakesService;
+import com.aitorzubizarreta.earthquakes.task.DownloadEarthquakesTask;
+
+public class MainActivity extends ActionBarActivity implements DownloadEarthquakesTask.AddEarthQuakeInterface {
 
     private static final int PREFS_ACTIVITY = 3;
 
@@ -15,6 +19,14 @@ public class MainActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        /*
+        DownloadEarthquakesTask task = new DownloadEarthquakesTask(this, this);
+        task.execute(getString(R.string.earthquakes_url));
+        */
+
+        // DownloadEarthquakesService.java
+        Intent download = new Intent(this, DownloadEarthquakesService.class);
+        startService(download);
     }
 
     @Override
@@ -51,4 +63,11 @@ public class MainActivity extends ActionBarActivity {
     // Descargar de internet los datos y guardarlos en la DB
     // Sacar los metodos del EarthquakeFragment
     // El main implementara la interfaz DownloadEarthquakesTask
+
+    @Override
+    public void notifyTotal(Integer count) {
+        String msg = getString(R.string.downloadedEarthquakes, count);
+        Toast t = Toast.makeText(this, msg, Toast.LENGTH_LONG);
+        t.show();
+    }
 }
