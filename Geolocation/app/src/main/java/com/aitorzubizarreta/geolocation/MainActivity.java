@@ -13,8 +13,12 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
 
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.location.LocationServices;
 
-public class MainActivity extends ActionBarActivity implements com.aitorzubizarreta.geolocation.listeners.LocationListener.AddLocationInterface {
+
+public class MainActivity extends ActionBarActivity implements GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener {
 
     // Botones de nuestra interfaz
     private TextView lblLat;
@@ -36,26 +40,34 @@ public class MainActivity extends ActionBarActivity implements com.aitorzubizarr
         lblAltitude = (TextView)findViewById(R.id.lblAltitude);
         lblSpeed = (TextView)findViewById(R.id.lblSpeed);
 
+        // Creamos una instancia de Google Play Services API
+        mGooglePSAPIClient = new GoogleApiClient().Builder(this)
+                .addConnectionCallbacks(this)
+                .addOnConnectionFailedListener(this)
+                .addApi(LocationServices.API)
+                .build();
+
         // Obtenermos el gestor de localización
-        locationManager = (LocationManager)getSystemService(Context.LOCATION_SERVICE);
+        //locationManager = (LocationManager)getSystemService(Context.LOCATION_SERVICE);
 
         // Especificamos los requisitos de nuestro aplicación para que android nos de el mejor para pedir la localización
-        Criteria criteria = new Criteria();
-        criteria.setAccuracy(Criteria.ACCURACY_FINE);
-        criteria.setPowerRequirement(criteria.POWER_HIGH);
-        criteria.setAltitudeRequired(true);
-        criteria.setSpeedRequired(true);
+        //Criteria criteria = new Criteria();
+        //criteria.setAccuracy(Criteria.ACCURACY_FINE);
+        //criteria.setPowerRequirement(criteria.POWER_HIGH);
+        //criteria.setAltitudeRequired(true);
+        //criteria.setSpeedRequired(true);
 
         // El sistema nos dará el mejor proveedor
-        bestProvider = locationManager.getBestProvider(criteria, true);
+        //bestProvider = locationManager.getBestProvider(criteria, true);
 
         // Obtenemos el proveedor
-        LocationProvider provider = locationManager.getProvider(bestProvider);
+        //LocationProvider provider = locationManager.getProvider(bestProvider);
 
         // Obtenemos la última localización del proveedor
-        Location location = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+        //Location location = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
 
         // Comprobamos que tenemos una última localización
+        /*
         if (location != null) {
             Double lat = location.getLatitude();
             Double lng = location.getLongitude();
@@ -66,12 +78,28 @@ public class MainActivity extends ActionBarActivity implements com.aitorzubizarr
             lblAltitude.setText(String.valueOf(altitude));
             lblSpeed.setText(String.valueOf(speed));
         }
+        */
 
-        Log.d("GEO", "GPS " + bestProvider + " - " + provider);
+        //Log.d("GEO", "GPS " + bestProvider + " - " + provider);
 
-        listenLocationChanges();
+        //listenLocationChanges();
     }
 
+    @Override
+    public void onConnected(Bundle bundle) {
+
+    }
+
+    @Override
+    public void onConnectionSuspended(int i) {
+
+    }
+
+    @Override
+    public void onConnectionFailed(ConnectionResult connectionResult) {
+
+    }
+    /*
     private void listenLocationChanges() {
         int t = 5000;
         int distance = 5;
@@ -80,7 +108,8 @@ public class MainActivity extends ActionBarActivity implements com.aitorzubizarr
 
         //locationManager.requestLocationUpdates(bestProvider, t, distance, listener);
     }
-
+    */
+    /*
     @Override
     public void addLocation(Location location) {
         lblLat.setText(String.valueOf(location.getLatitude()));
@@ -88,4 +117,5 @@ public class MainActivity extends ActionBarActivity implements com.aitorzubizarr
         lblAltitude.setText(String.valueOf(location.getAltitude()));
         lblSpeed.setText(String.valueOf(location.getSpeed()));
     }
+    */
 }
