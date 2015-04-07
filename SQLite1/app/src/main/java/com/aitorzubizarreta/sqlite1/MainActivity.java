@@ -30,7 +30,7 @@ public class MainActivity extends ActionBarActivity {
         insertarPersona("Jose", "Gonzalez", 76);
         insertarPersona("Manolo", "Villa", 64);
         */
-        borrarPersonas("Aitor");
+        borrarPersonas("Marta");
 
         mostrarDatosPersonas();
     }
