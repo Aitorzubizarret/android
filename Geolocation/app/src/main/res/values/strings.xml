@@ -7,4 +7,6 @@
     <string name="longitude_text">Longitud : </string>
     <string name="altitude_text">Altitud : </string>
     <string name="speed_text">Velocidad : </string>
+    <string name="connect_Text">Conectar</string>
+    <string name="listener_Text">Escuchar</string>
 </resources>

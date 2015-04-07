@@ -5,6 +5,7 @@ import android.location.Criteria;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
+import android.location.LocationProvider;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -45,9 +46,28 @@ public class MainActivity extends ActionBarActivity implements com.aitorzubizarr
         criteria.setAltitudeRequired(true);
         criteria.setSpeedRequired(true);
 
+        // El sistema nos dará el mejor proveedor
         bestProvider = locationManager.getBestProvider(criteria, true);
 
-        Log.d("GEO", bestProvider);
+        // Obtenemos el proveedor
+        LocationProvider provider = locationManager.getProvider(bestProvider);
+
+        // Obtenemos la última localización del proveedor
+        Location location = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+
+        // Comprobamos que tenemos una última localización
+        if (location != null) {
+            Double lat = location.getLatitude();
+            Double lng = location.getLongitude();
+            Double altitude = location.getAltitude();
+            Float speed = location.getSpeed();
+            lblLat.setText(String.valueOf(lat));
+            lblLng.setText(String.valueOf(lng));
+            lblAltitude.setText(String.valueOf(altitude));
+            lblSpeed.setText(String.valueOf(speed));
+        }
+
+        Log.d("GEO", "GPS " + bestProvider + " - " + provider);
 
         listenLocationChanges();
     }
@@ -56,9 +76,9 @@ public class MainActivity extends ActionBarActivity implements com.aitorzubizarr
         int t = 5000;
         int distance = 5;
 
-        LocationListener listener = new LocationListener(this);
+        //LocationListener listener = new LocationListener(this);
 
-        locationManager.requestLocationUpdates(bestProvider, t, distance, listener);
+        //locationManager.requestLocationUpdates(bestProvider, t, distance, listener);
     }
 
     @Override
