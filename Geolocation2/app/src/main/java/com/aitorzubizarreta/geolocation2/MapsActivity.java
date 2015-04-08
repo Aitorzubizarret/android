@@ -44,8 +44,8 @@ public class MapsActivity extends FragmentActivity implements GoogleApiClient.Co
 
     private void createLocationRequest() {
         myLocationRequest = new LocationRequest();
-        myLocationRequest.setInterval(3000);
-        myLocationRequest.setFastestInterval(1000);
+        myLocationRequest.setInterval(10000);
+        myLocationRequest.setFastestInterval(10000);
         myLocationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
     }
 
@@ -140,7 +140,7 @@ public class MapsActivity extends FragmentActivity implements GoogleApiClient.Co
         mMap.addMarker(new MarkerOptions()
                 .position(new LatLng(myLastLocation.getLatitude(), myLastLocation.getLongitude()))
                 .title("Marker")
-                .snippet("Lat:" + myLastLocation.getLatitude() + " Lng:" + myLastLocation.getLongitude()));
+                .snippet("Lat:" + myLastLocation.getLatitude() + " Lng:" + myLastLocation.getLongitude() + "Speed:" + myLastLocation.getSpeed() + "" + myLastLocation.getTime()));
 
         coordenades = "Lat:" + myLastLocation.getLatitude() + " Lng:" + myLastLocation.getLongitude() + "\n";
         try {
