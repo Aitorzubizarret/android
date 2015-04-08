@@ -9,4 +9,5 @@
     <string name="speed_text">Velocidad : </string>
     <string name="connect_Text">Conectar</string>
     <string name="listener_Text">Escuchar</string>
+    <string name="location_status">Status: </string>
 </resources>
