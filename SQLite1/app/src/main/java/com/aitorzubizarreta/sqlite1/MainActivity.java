@@ -43,8 +43,8 @@ public class MainActivity extends ActionBarActivity {
         gestorDB.insertPerson(nombre, apellido, edad);
     }
     private void borrarPersonas(String nombre) {
-        int personasEliminadas = gestorDB.deletePersons(nombre);
-        Log.d(CONSOLE, "Se han eliminado " + personasEliminadas + " personas.");
+        //int personasEliminadas = gestorDB.deletePersons(nombre);
+        //Log.d(CONSOLE, "Se han eliminado " + personasEliminadas + " personas.");
     }
     private void modificarPersona() {
 

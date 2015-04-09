@@ -67,7 +67,7 @@ public class GestorDB{
     public int deletePersons(String whereClause, ArrayList whereArgs) {
         int contador = 0;
 
-        db.delete(DBOpenHelper.NombreTablaDB, whereClause, whereArgs);
+        //db.delete(DBOpenHelper.NombreTablaDB, whereClause, whereArgs);
         /*
         db.beginTransaction();
         try {
@@ -105,12 +105,14 @@ public class GestorDB{
     public void modifyPerson() {
 
     }
+    /*
     public void query() {
         String tableName = DBOpenHelper.NombreTablaDB;
         String[] tableColumns;
         String[] whe;
         Cursor cursor = db.query(tableName, tableColumns, whereClause, whereArgs, groupBy, having, orderBy);
     }
+    */
     public void getAllPersonas() {
         Cursor cursor2 = db.rawQuery("Select * from personas", null);
         try {
@@ -123,9 +125,6 @@ public class GestorDB{
             Log.d(CONSOLE, "Error al acceder a los datos de la consulta SELECT");
             Log.e("Base de datos", "Error al acceder a los datos de la consulta SELECT");
         }
-    }
-    public void query() {
-
     }
 
     // Creamos una clase dentro nuestra clase para que podamos gestionar la DB sólo desde aqui.
