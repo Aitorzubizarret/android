@@ -50,11 +50,12 @@ public class MainActivity extends ActionBarActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 // Obtenemos la posición del objeto(item) seleccionado en la lista y se la asignamos a un objeto para después obtener los datos a través de él.
-                Place selectedPlace = (Place)parent.getItemAtPosition(position);
+                Place selectedPlace = (Place) parent.getItemAtPosition(position);
                 // Sacamos un toast por pantalla
                 Toast toast = Toast.makeText(getApplicationContext(), selectedPlace.getName(), Toast.LENGTH_SHORT);
                 toast.show();
                 // Mostramos la pantalla con más info sobre el lugar seleccionado
+                //Intent intent = new Intent(MainActivity.this, DetailMapsActivity.class); <-- Google Maps
                 Intent intent = new Intent(MainActivity.this, PlaceDetail.class);
                 startActivity(intent);
             }
