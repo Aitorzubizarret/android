@@ -19,11 +19,9 @@ public class Place {
     public String getName() {
         return name;
     }
-
     public Double getLatitude() {
         return latitude;
     }
-
     public Double getLongitude() {
         return longitude;
     }
