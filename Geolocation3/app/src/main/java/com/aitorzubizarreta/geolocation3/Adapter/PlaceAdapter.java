@@ -2,10 +2,12 @@ package com.aitorzubizarreta.geolocation3.Adapter;
 
 import android.content.Context;
 import android.text.Layout;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.aitorzubizarreta.geolocation3.Model.Place;
@@ -19,30 +21,33 @@ import java.util.List;
  */
 public class PlaceAdapter extends ArrayAdapter<Place> {
 
+    private int resource;
+
     // Constructor
-    public PlaceAdapter(Context context, ArrayList<Place> places) {
+    public PlaceAdapter(Context context, int resource, ArrayList<Place> places) {
         super(context, 0, places);
+        this.resource = resource; // layout
     }
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        // Get the data item for this position
-        //Place myPlace = getPlace(position);
+        // Obtenemos el objeto lugar
+        Place myPlace = getItem(position);
 
         // Check if an existing view is being reused, otherwise inflate the view
         if (convertView == null) {
-            convertView = LayoutInflater.from(getContext()).inflate(R.layout.place_info, parent, false);
+            convertView = LayoutInflater.from(getContext()).inflate(this.resource, parent, false);
         }
 
-        // Lookup view for data population
+        // Capturamos los elementos UI de la vista
         TextView placeName = (TextView)convertView.findViewById(R.id.placeNameTextView);
         TextView placeLat = (TextView)convertView.findViewById(R.id.placeLatTextView);
         TextView placeLong = (TextView)convertView.findViewById(R.id.placeLngTextView);
 
-        // Populate the data into the template view using the data object
-        placeName.setText("Name");
-        placeLat.setText("Lat");
-        placeLong.setText("Long");
+        // Rellenamos los datos de la plantilla con los del objeto
+        placeName.setText(myPlace.getName());
+        placeLat.setText("Lat: " + String.valueOf(myPlace.getLatitude()));
+        placeLong.setText("Lng: " + String.valueOf(myPlace.getLongitude()));
 
         return convertView;
     }

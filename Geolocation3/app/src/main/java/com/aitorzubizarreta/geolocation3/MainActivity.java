@@ -17,48 +17,54 @@ import java.util.ArrayList;
 
 public class MainActivity extends ActionBarActivity {
 
-    // UI Element
+    // Elementos de la UI
     private ListView lista;
+
     // Variables
     private ArrayList<Place> placesList;
-    // Create the adapter to convert the array to views
-    private PlaceAdapter adapter = new PlaceAdapter(this, placesList);
-    //private ArrayAdapter<String> aa;
+
+    // Creamos el adaptador que comunicará los datos (ArrayList, BD) con la vista.
+    private PlaceAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        // Inicializo el ArrayList y el adapter
+        placesList = new ArrayList<Place>();
+        adapter  = new PlaceAdapter(this, R.layout.place_info, placesList); // Contexto o actividad, layout y datos.
+
         getUIElements();
         loadArrayList();
-        showArrayList();
-    }
-    private void loadArrayList() {
-        // Inicializo el ArrayList
-        placesList = new ArrayList<Place>();
-
-        // Rellenamos de datos
-        Place myPlace = new Place("Kursaal", 43.324568, -1.977581);
-        placesList.add(myPlace);
-        Place myPlace2 = new Place("La Concha", 43.3180289, -1.9916765);
-        placesList.add(myPlace2);
-
-    }
-    private void showArrayList() {
-        // Inicializamos el ArrayAdapter
-
-
-        for (int i=0; i < placesList.size(); i++)  {
-            Log.d("Console", placesList.get(i).getName());
-        }
     }
     private void getUIElements() {
         lista = (ListView)findViewById(R.id.listView);
         lista.setAdapter(adapter);
     }
-
-
+    private void loadArrayList() {
+        // Rellenamos de datos
+        Place myPlace = new Place("Kursaal", 43.324568, -1.977581);
+        placesList.add(myPlace);
+        Place myPlace2 = new Place("La Concha", 43.3180289, -1.9916765);
+        placesList.add(myPlace2);
+        placesList.add(myPlace2);
+        placesList.add(myPlace2);
+        placesList.add(myPlace2);
+        placesList.add(myPlace2);
+        placesList.add(myPlace2);
+        placesList.add(myPlace2);
+        placesList.add(myPlace2);
+        placesList.add(myPlace2);
+        placesList.add(myPlace2);
+        placesList.add(myPlace2);
+        placesList.add(myPlace2);
+        placesList.add(myPlace2);
+        placesList.add(myPlace2);
+        placesList.add(myPlace2);
+        placesList.add(myPlace2);
+        placesList.add(myPlace2);
+    }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
