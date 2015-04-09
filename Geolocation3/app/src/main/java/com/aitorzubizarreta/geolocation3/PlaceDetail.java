@@ -4,14 +4,35 @@ import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
 
 
 public class PlaceDetail extends ActionBarActivity {
+
+    // UI Elements
+    private TextView placeName;
+    private TextView placeLat;
+    private TextView placeLong;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_place_detail);
+
+        getUIElements();
+
+        // Obtenemos los datos del intent
+        Bundle placeData = this.getIntent().getExtras();
+
+        placeName.setText(placeData.getString(MainActivity.PARCELABLE_NAME));
+        //placeLat.setText(placeData.getDouble(MainActivity.PARCELABRE_LAT));
+
+    }
+
+    private void getUIElements() {
+        placeName = (TextView)findViewById(R.id.lblPlaceName);
+        placeLat = (TextView)findViewById(R.id.lblPlaceLat);
+        placeLong = (TextView)findViewById(R.id.lblPlaceLong);
     }
 
 

@@ -31,6 +31,12 @@ public class MainActivity extends ActionBarActivity {
     // Creamos el adaptador que comunicará los datos (ArrayList, BD) con la vista.
     private PlaceAdapter adapter;
 
+    // Parcelable
+    public static final String PARCELABLE_NAME = "parcelable_name";
+    public static final String PARCELABRE_LAT = "parcelable_lat";
+    public static final String PARCELABLE_LONG = "parcelable_long";
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -57,6 +63,9 @@ public class MainActivity extends ActionBarActivity {
                 // Mostramos la pantalla con más info sobre el lugar seleccionado
                 //Intent intent = new Intent(MainActivity.this, DetailMapsActivity.class); <-- Google Maps
                 Intent intent = new Intent(MainActivity.this, PlaceDetail.class);
+                intent.putExtra(PARCELABLE_NAME, selectedPlace.getName());
+                intent.putExtra(PARCELABRE_LAT, selectedPlace.getLatitude());
+                intent.putExtra(PARCELABLE_LONG, selectedPlace.getLongitude());
                 startActivity(intent);
             }
         });
