@@ -31,4 +31,15 @@
         android:layout_below="@+id/lblPlaceLat"
         android:layout_alignParentStart="true"
         android:layout_marginTop="44dp" />
+
+    <fragment
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:name="com.google.android.gms.maps.MapFragment"
+        android:id="@+id/fragment"
+        android:layout_below="@+id/lblPlaceLong"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="56dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true" />
 </RelativeLayout>

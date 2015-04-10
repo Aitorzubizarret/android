@@ -33,7 +33,7 @@ public class MainActivity extends ActionBarActivity {
 
     // Parcelable
     public static final String PARCELABLE_NAME = "parcelable_name";
-    public static final String PARCELABRE_LAT = "parcelable_lat";
+    public static final String PARCELABLE_LAT = "parcelable_lat";
     public static final String PARCELABLE_LONG = "parcelable_long";
 
 
@@ -64,7 +64,7 @@ public class MainActivity extends ActionBarActivity {
                 //Intent intent = new Intent(MainActivity.this, DetailMapsActivity.class); <-- Google Maps
                 Intent intent = new Intent(MainActivity.this, PlaceDetail.class);
                 intent.putExtra(PARCELABLE_NAME, selectedPlace.getName());
-                intent.putExtra(PARCELABRE_LAT, selectedPlace.getLatitude());
+                intent.putExtra(PARCELABLE_LAT, selectedPlace.getLatitude());
                 intent.putExtra(PARCELABLE_LONG, selectedPlace.getLongitude());
                 startActivity(intent);
             }

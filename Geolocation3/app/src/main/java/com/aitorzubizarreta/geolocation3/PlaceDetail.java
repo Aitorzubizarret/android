@@ -25,7 +25,8 @@ public class PlaceDetail extends ActionBarActivity {
         Bundle placeData = this.getIntent().getExtras();
 
         placeName.setText(placeData.getString(MainActivity.PARCELABLE_NAME));
-        //placeLat.setText(placeData.getDouble(MainActivity.PARCELABRE_LAT));
+        placeLat.setText(String.valueOf(placeData.getDouble(MainActivity.PARCELABLE_LAT)));
+        placeLong.setText(String.valueOf(placeData.getDouble(MainActivity.PARCELABLE_LONG)));
 
     }
 
