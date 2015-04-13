@@ -8,49 +8,100 @@ import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.FrameLayout;
 import android.widget.Toast;
 
-
 public class MainActivity extends Activity {
+
+    // Var
+    private ActionBar actionBar;
+    private ActionBar.Tab tab1, tab2;
+    private ActionBar.TabListener tabListener1, tabListener2;
+    private FragmentTransaction ft;
+    private Fragment1 f1;
+    private Fragment2 f2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        ActionBar actionBar = getActionBar();
+        createListeners();
+        addTabsToActionBar();
+    }
+    private void addTabsToActionBar() {
+        // Obtenemos el ActionBar y lo personalizamos con un titulo y un subtitulo
+        // También lo cambiamos el modo a navegación con pestañas
+        actionBar = getActionBar();
         actionBar.setTitle("Titulo");
-        actionBar.setSubtitle("Subtitulo");
+        actionBar.setSubtitle("Subtitle");
         actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
 
-        // Tab 1
-        ActionBar.Tab tabOne = actionBar.newTab();
-        tabOne.setText("Tab 1")
-            .setTabListener(new TabListener<MyFragment>());
-        actionBar.addTab(tabOne);
+        // Creamos la TAB 1 y la añadimos al ActionBar
+        tab1 = actionBar.newTab();
+        tab1.setText("Tab 1")
+                .setTabListener(tabListener1);
+        actionBar.addTab(tab1);
 
-        // Tab 2
-        ActionBar.Tab tabTwo = actionBar.newTab();
-        tabTwo.setText("Tab 2")
-                .setTabListener(new ActionBar.TabListener() {
-                    @Override
-                    public void onTabSelected(ActionBar.Tab tab, FragmentTransaction ft) {
-                        Toast toast = Toast.makeText(getApplicationContext(), "onTabSelected", Toast.LENGTH_SHORT);
-                        toast.show();
-                    }
-
-                    @Override
-                    public void onTabUnselected(ActionBar.Tab tab, FragmentTransaction ft) {
-                        Toast toast = Toast.makeText(getApplicationContext(), "onTabUnselected", Toast.LENGTH_SHORT);
-                        toast.show();
-                    }
-
-                    @Override
-                    public void onTabReselected(ActionBar.Tab tab, FragmentTransaction ft) {
-                        Toast toast = Toast.makeText(getApplicationContext(), "onTabReselected", Toast.LENGTH_SHORT);
-                        toast.show();
-                    }
-                });
-        actionBar.addTab(tabTwo);
+        // Creamos la TAB 2 y la añadimos al ActionBar
+        tab2 = actionBar.newTab();
+        tab2.setText("Tab 2")
+                .setTabListener(tabListener2);
+        actionBar.addTab(tab2);
     }
+    private void createListeners() {
+        tabListener1 = new ActionBar.TabListener() {
+            @Override
+            public void onTabSelected(ActionBar.Tab tab, FragmentTransaction ft) {
+                Toast toast = Toast.makeText(getApplicationContext(), "Tab1", Toast.LENGTH_SHORT);
+                toast.show();
+
+                // Cargamos el fragmento 1
+                ft = getFragmentManager().beginTransaction();
+
+                if (f1 == null) {
+                    f1 = new Fragment1();
+                }
+                ft.replace(R.id.displayFragment, f1).commit();
+            }
+
+            @Override
+            public void onTabUnselected(ActionBar.Tab tab, FragmentTransaction ft) {
+
+            }
+
+            @Override
+            public void onTabReselected(ActionBar.Tab tab, FragmentTransaction ft) {
+
+            }
+        };
+
+        tabListener2 = new ActionBar.TabListener() {
+            @Override
+            public void onTabSelected(ActionBar.Tab tab, FragmentTransaction ft) {
+                Toast toast = Toast.makeText(getApplicationContext(), "Tab2", Toast.LENGTH_SHORT);
+                toast.show();
+
+                // Cargamos el fragmento 2
+                ft = getFragmentManager().beginTransaction();
+
+                if (f2 == null) {
+                    f2 = new Fragment2();
+                }
+
+                ft.replace(R.id.displayFragment, f2).commit();
+            }
+
+            @Override
+            public void onTabUnselected(ActionBar.Tab tab, FragmentTransaction ft) {
+
+            }
+
+            @Override
+            public void onTabReselected(ActionBar.Tab tab, FragmentTransaction ft) {
+
+            }
+        };
+    }
+
 }

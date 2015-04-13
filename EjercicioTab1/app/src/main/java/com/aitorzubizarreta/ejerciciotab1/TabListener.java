@@ -8,7 +8,7 @@ import android.app.FragmentTransaction;
 /**
  * Created by cursomovil on 10/04/15.
  */
-public static class TabListener<T extends Fragment> implements ActionBar.TabListener {
+public  class TabListener<T extends Fragment> implements ActionBar.TabListener {
 
     private Fragment fragment;
     private Activity activity;
