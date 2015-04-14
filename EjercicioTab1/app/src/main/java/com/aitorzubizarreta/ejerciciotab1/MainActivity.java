@@ -34,7 +34,7 @@ public class MainActivity extends Activity {
         addTabsToActionBar();
 
         /*
-        * COMPROVAMOS SI TENEMOS DATOS EN EL BUNDLE "SAVEDINSTANCESTATE"
+        * COMPROBAMOS SI TENEMOS DATOS EN EL BUNDLE "SAVEDINSTANCESTATE"
         * Si hay datos obtendremos el indice del tab que estaba seleccionado previamente.
         * */
         if (savedInstanceState != null) {
