@@ -6,6 +6,7 @@ import android.app.FragmentTransaction;
 import android.content.Context;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.FrameLayout;
@@ -14,6 +15,9 @@ import android.widget.Toast;
 public class MainActivity extends Activity {
 
     // Var
+    private static final String SELECTED_TAB = "selectedTab";
+    private int selectedTabID = 0;
+
     private ActionBar actionBar;
     private ActionBar.Tab tab1, tab2;
     private ActionBar.TabListener tabListener1, tabListener2;
@@ -28,6 +32,22 @@ public class MainActivity extends Activity {
 
         createListeners();
         addTabsToActionBar();
+
+        /*
+        * COMPROVAMOS SI TENEMOS DATOS EN EL BUNDLE "SAVEDINSTANCESTATE"
+        * Si hay datos obtendremos el indice del tab que estaba seleccionado previamente.
+        * */
+        if (savedInstanceState != null) {
+            selectedTabID = savedInstanceState.getInt(SELECTED_TAB);
+            Log.d("Console", String.valueOf(selectedTabID));
+        }
+
+        /*
+        * SELECCIONAMOS EL TAB BAR
+        * Si el usuario ha girado el dispositivo tendremos el tab bar seleccionado dentro del bundle "savedInstanceState"
+        * si no, seleccionamos el predeterminado, que es el 0, y esta definido al inicio, cuando creamos la vcariable.
+        * */
+        actionBar.setSelectedNavigationItem(selectedTabID);
     }
     private void addTabsToActionBar() {
         // Obtenemos el ActionBar y lo personalizamos con un titulo y un subtitulo
@@ -104,4 +124,16 @@ public class MainActivity extends Activity {
         };
     }
 
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putInt(SELECTED_TAB, actionBar.getSelectedNavigationIndex());
+        //Log.d("Console", "onSaveInstanceState " + actionBar.getSelectedNavigationIndex());
+    }
+
+    @Override
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+        //Log.d("Console", "onRestoreInstanceState");
+    }
 }
